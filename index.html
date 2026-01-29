@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DayRing - 今日のタスク</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- ヘッダー -->
+    <header class="header">
+      <div class="date-display" id="dateDisplay"></div>
+    </header>
+
+    <!-- 起床-就寝時間設定 -->
+    <div class="wake-sleep-time">
+      <div class="wake-time-section">
+        <span class="wake-time-label">起床時間</span>
+        <input type="time" class="wake-time-input" id="wakeTimeInput" value="07:00">
+      </div>
+      <div class="sleep-time-section">
+        <span class="sleep-time-label">就寝時間</span>
+        <input type="time" class="sleep-time-input" id="sleepTimeInput" value="22:00">
+      </div>
+    </div>
+
+    <!-- 円グラフ -->
+    <div class="circle-container" id="circleContainer">
+      <svg class="circle-svg" viewBox="0 0 200 200">
+        <circle class="circle-bg" cx="100" cy="100" r="88" />
+        <g id="segmentsGroup"></g>
+      </svg>
+      <div class="time-labels" id="timeLabels"></div>
+      <div class="center-display">
+        <div class="current-time" id="currentTime">00:00</div>
+        <div class="task-count" id="taskCount">タスクなし</div>
+      </div>
+    </div>
+
+    <!-- タスクリスト -->
+    <section class="task-list-section">
+      <div class="section-header">
+        <h2 class="section-title">今日のタスク</h2>
+      </div>
+      <div class="task-list" id="taskList">
+        <div class="empty-state">
+          <div class="empty-state-icon">○</div>
+          <p>タスクを追加してください</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 追加ボタン -->
+  <button class="add-btn" id="addBtn">+</button>
+
+  <!-- タスク追加/編集モーダル -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">タスクを追加</h3>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">タスク名</label>
+          <input type="text" class="form-input" id="taskNameInput" placeholder="タスクの内容を入力">
+        </div>
+        <div class="form-group">
+          <label class="form-label">時間帯</label>
+          <div class="time-inputs">
+            <input type="time" class="form-input" id="startTimeInput" value="09:00">
+            <span class="time-separator">→</span>
+            <input type="time" class="form-input" id="endTimeInput" value="10:00">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">優先度</label>
+          <div class="priority-input">
+            <input type="number" class="form-input" id="priorityInput" value="1" min="1" max="99">
+            <span class="priority-hint">数字が小さいほど優先度が高い</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">カラー</label>
+          <div class="color-picker" id="colorPicker"></div>
+        </div>
+        <div class="form-actions" id="formActions">
+          <button class="btn btn-secondary" id="cancelBtn">キャンセル</button>
+          <button class="btn btn-primary" id="saveBtn">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ES Modulesとしてアプリケーションを読み込み -->
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
